@@ -5,7 +5,8 @@
     "paths": {
       "@env": ["src/environments/environment"],
       "@shared/*": ["src/app/_shared/*"],
-      "@core/*": ["src/app/_core/*"]
+      "@core/*": ["src/app/_core/*"],
+      "@tetris/*": ["src/app/tetris-game/*"],
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
