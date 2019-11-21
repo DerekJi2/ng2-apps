@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TetrisScreenComponent implements OnInit {
 
-  constructor() { }
+  
+  constructor() {
+    
+  }
+
 
   ngOnInit() {
   }

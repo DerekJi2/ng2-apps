@@ -2,6 +2,24 @@
 
 section {
   @include section;
-  @include flex;
   height: $screen-height;
+  text-align: left;
+}
+
+.screen-box {
+  width: 100%;
+  height: 100%;
+  border: 5px solid;
+  border-color: #987f0f #fae36c #fae36c #987f0f;
+  margin: 0 auto;
+  position: relative;
+}
+
+.screen-bg {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background: #9ead86;
+  padding: 8px;
+  border: 2px solid #494536;
 }

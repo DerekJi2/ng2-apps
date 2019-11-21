@@ -4,11 +4,18 @@
   margin: $game-margin;
 }
 
-@mixin flex {
-  display: -webkit-flex;
-  display: flex;
-  flex-wrap: nowrap;
-  * {
-    flex: 0 0 auto;
-  }
+@mixin inactive-border {
+  border: 2px solid $inactive-color;
+}
+
+@mixin active-border {
+  border: 2px solid $active-color;
+}
+
+@mixin inactive-background {
+  background: $inactive-color;
+}
+
+@mixin active-background {
+  background: $active-color;
 }

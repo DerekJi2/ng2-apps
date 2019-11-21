@@ -1,10 +1,5 @@
 @import 'tetris/index.scss';
 
-section {
-  @include section;
-  width: 61.8%;
-  height: $screen-height;
-  margin: 8px;
-  border: 1px solid blue;
-
+.info-center-box {
+  margin: 0 12px 0 30px;
 }

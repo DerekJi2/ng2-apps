@@ -6,7 +6,8 @@ import { TetrisControlPanelComponent } from '@tetris/tetris-control-panel/tetris
 import { TetrisScreenComponent } from '@tetris/tetris-screen/tetris-screen.component';
 import { TetrisPlayBoardComponent } from '@tetris/tetris-play-board/tetris-play-board.component';
 import { TetrisInfoCenterComponent } from '@tetris/tetris-info-center/tetris-info-center.component';
-
+import { TetrisSquareUnitComponent } from './tetris-square-unit/tetris-square-unit.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -15,10 +16,12 @@ import { TetrisInfoCenterComponent } from '@tetris/tetris-info-center/tetris-inf
     TetrisScreenComponent,
     TetrisPlayBoardComponent,
     TetrisInfoCenterComponent,
+    TetrisSquareUnitComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
+    FlexLayoutModule,
   ],
   exports: [
   ]

@@ -1,0 +1,31 @@
+@import 'tetris/index.scss';
+
+.outer-square {
+    width: $square-width;
+    height: $square-width;
+    margin: 2px;
+}
+
+.outer-square.inactive {
+    @include inactive-border;
+}
+
+.outer-square.active {
+    @include active-border;
+}
+
+.inner-square {
+    width: $square-width - 10px;
+    height: $square-width - 10px;
+    margin: 3px;
+}
+
+.inner-square.inactive {
+    @include inactive-background;
+    @include inactive-border;
+}
+
+.inner-square.active {
+    @include active-background;
+    @include active-border;
+}

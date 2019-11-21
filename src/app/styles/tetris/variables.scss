@@ -1,7 +1,14 @@
 $game-height: 820px;
-$game-max-width: 680px;
+$game-max-width: 480px;
 $game-margin: 8px;
 
 $screen-height-base: 75;
 $screen-height: percentage($screen-height-base/100);
 $control-panel-height: percentage(1 - $screen-height-base/100);
+
+$screen-bg: #879372;
+
+$square-width: 20px;
+
+$inactive-color: #888;
+$active-color: #111;
