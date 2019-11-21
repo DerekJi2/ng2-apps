@@ -1,0 +1,6 @@
+@import 'tetris/index.scss';
+
+section {
+  @include section;
+  height: $control-panel-height;
+}

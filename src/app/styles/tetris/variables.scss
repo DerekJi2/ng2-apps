@@ -1,0 +1,7 @@
+$game-height: 820px;
+$game-max-width: 680px;
+$game-margin: 8px;
+
+$screen-height-base: 75;
+$screen-height: percentage($screen-height-base/100);
+$control-panel-height: percentage(1 - $screen-height-base/100);

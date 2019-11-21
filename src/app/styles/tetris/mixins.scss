@@ -1,0 +1,14 @@
+@import './variables.scss';
+
+@mixin section {
+  margin: $game-margin;
+}
+
+@mixin flex {
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  * {
+    flex: 0 0 auto;
+  }
+}

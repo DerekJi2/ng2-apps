@@ -1,0 +1,7 @@
+@import 'tetris/index.scss';
+
+section {
+  @include section;
+  @include flex;
+  height: $screen-height;
+}
