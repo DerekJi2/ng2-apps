@@ -1,7 +1,7 @@
 <div class="play-field">
   <div *ngFor="let c of Columns; let y = index" class="field-row" fxLayout="row" fxLayoutAlign="space-around center">
     <div *ngFor="let r of Row(y); let x = index" fxFlex="8%">
-        <app-tetris-square-unit></app-tetris-square-unit>
+        <app-tetris-square-unit [value]="matrixSvc.value(x, y)"></app-tetris-square-unit>
     </div>
     
   </div>

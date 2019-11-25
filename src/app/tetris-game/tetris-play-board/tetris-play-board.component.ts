@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SquareMatrixService } from '@core/services/square-matrix.service';
+import { interval, pipe } from 'rxjs';
+import { takeUntil, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tetris-play-board',
@@ -11,31 +14,25 @@ export class TetrisPlayBoardComponent implements OnInit {
   public readonly matrixY = 20;
   public squareMatrix: number[][] = [];
 
-  constructor() {
-    this.initSquareMatrix();
+  constructor(
+    public matrixSvc: SquareMatrixService,
+  ) {
   }
 
-  
   get Columns(): Array<number[]> {
-    return this.squareMatrix;
+    const cols = this.matrixSvc.columns();
+    console.log(cols.length);
+    return cols;
   }
 
-  public Row(x): number[] {
-    return this.squareMatrix[x];
+  public Row(x: number): number[] {
+    return this.matrixSvc.row(x);
   }
 
   ngOnInit() {
-  }
+    this.matrixSvc.reset();
 
-  
-  private initSquareMatrix(): void {
-    for (let y = 0; y < this.matrixY; y++) {
-      const row: number[] = [];
-      for (let x = 0; x < this.matrixX; x++) {
-        row.push(0);
-      }
-      this.squareMatrix.push(row);
-    }
+    this.matrixSvc.spreadUpAndDown();
   }
 
 }

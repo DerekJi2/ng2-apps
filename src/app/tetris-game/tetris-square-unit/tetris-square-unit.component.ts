@@ -7,7 +7,11 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 })
 export class TetrisSquareUnitComponent implements OnInit, OnChanges {
 
-  @Input() state: 'inactive' | 'active' = 'inactive';
+  @Input() value: 0 | 1;
+  
+  get state() {
+    return this.value > 0 ? 'active' : 'inactive';
+  }
 
   constructor() { }
 
