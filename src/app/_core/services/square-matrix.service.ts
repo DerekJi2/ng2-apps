@@ -71,28 +71,40 @@ export class SquareMatrixService {
   /**
    * 
    */
-  public spreadUpAndDown(): void {
+  public async spreadUpAndDown(): Promise<void> {
+    await this.spreadUp().toPromise();
+    await this.spreadDown().toPromise();
+  }
+
+  /**
+   * 
+   */
+  public spreadUp(value: number = 1): Observable<number> {
     let y = this.numberOfRows - 1;
-    let movingDown = false;
     const move$ = interval(50)
     .pipe(
-      take(this.numberOfRows * 2 + 1),
+      take(this.numberOfRows),
       tap(() => {
-        if (y < 0) {
-          y++;
-          return;
-        }
-        const value = movingDown ? 0 : 1;
         console.log(`y = ${y}`);
-        this.setRowValues(y, value);
-        y = movingDown ? y + 1 : y - 1;
-        if (y < 0) {
-          movingDown = true;
-          y = -1;
-        }
+        this.setRowValues(y--, value);
       }),
     );
 
-    move$.subscribe();
+    return move$;
   }
+
+  public spreadDown(value: number = 0): Observable<number> {
+    let y = 0;
+    const move$ = interval(50)
+    .pipe(
+      take(this.numberOfRows),
+      tap(() => {
+        console.log(`y = ${y}`);
+        this.setRowValues(y++, value);
+      }),
+    );
+
+    return move$;
+  }
+
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SquareMatrixService } from '@core/services/square-matrix.service';
-import { interval, pipe } from 'rxjs';
-import { takeUntil, take } from 'rxjs/operators';
+import { merge, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tetris-play-board',
@@ -34,5 +33,4 @@ export class TetrisPlayBoardComponent implements OnInit {
 
     this.matrixSvc.spreadUpAndDown();
   }
-
 }
