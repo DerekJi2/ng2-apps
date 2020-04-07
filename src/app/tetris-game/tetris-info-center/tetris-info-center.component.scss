@@ -1,5 +1,23 @@
 @import 'tetris/index.scss';
 
+$next-square-width: 100px;
+
 .info-center-box {
   margin: 0 12px 0 30px;
+}
+
+.d-num {
+  font-size: 24px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.d-label {
+  font-size: 12px;
+}
+
+.d-next-shape {
+  margin: 20px auto;
+  border: 1px solid #969696;
+  width: $next-square-width;
+  height: $next-square-width;
 }

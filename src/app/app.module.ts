@@ -11,6 +11,7 @@ import { TetrisGameModule } from '@tetris/tetris-game.module';
 import { tetrisAppReducers } from '@core/tetris/store/reducers/tetris-app.reducers';
 import { TetrisConfigEffects } from '@core/tetris/store/effects/tetris-config.effects';
 import { environment } from '@env';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { environment } from '@env';
     CoreModule,
     TetrisGameModule,
 
+    FlexLayoutModule,
     StoreModule.forRoot(tetrisAppReducers),
     EffectsModule.forRoot([TetrisConfigEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
