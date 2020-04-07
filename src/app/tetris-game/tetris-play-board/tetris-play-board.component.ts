@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { SquareMatrixService } from '@core/services/square-matrix.service';
-import { merge, mergeMap } from 'rxjs/operators';
+import { SquareMatrixService } from '@core/tetris/services/square-matrix.service';
+import { BaseTetrisComponent } from '@tetris/shared/components/base-tetris-component';
+import { ITetrisAppState } from '@core/tetris/store/states/tetris-app.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-tetris-play-board',
   templateUrl: './tetris-play-board.component.html',
   styleUrls: ['./tetris-play-board.component.scss']
 })
-export class TetrisPlayBoardComponent implements OnInit {
+export class TetrisPlayBoardComponent extends BaseTetrisComponent implements OnInit {
 
   public readonly matrixX = 10;
   public readonly matrixY = 20;
@@ -15,7 +17,9 @@ export class TetrisPlayBoardComponent implements OnInit {
 
   constructor(
     public matrixSvc: SquareMatrixService,
+    protected store: Store<ITetrisAppState>
   ) {
+    super(store);
   }
 
   get Columns(): Array<number[]> {
