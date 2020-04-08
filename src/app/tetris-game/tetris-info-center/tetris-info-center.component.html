@@ -1,4 +1,4 @@
-<div class="info-center-box">
+<div class="info-center-box" *ngIf="config$ | async as config">
 
   <div class="text-right d-num">
     <span>889</span>
@@ -23,5 +23,9 @@
       <div class="d-num">1</div>
       <div class="d-label"><i>LEVEL</i></div>
     </div>
+  </div>
+
+  <div>
+    <pre>{{ config$ | async | json }}</pre>
   </div>
 </div>

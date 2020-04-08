@@ -8,3 +8,14 @@ export const selectTetrisConfig = createSelector(
   configState,
   (state: ITetrisConfigState) => state.config
 );
+
+export const selectTetrisSettings = createSelector(
+  configState,
+  (state: ITetrisConfigState) => state.config.settings
+);
+
+
+export const selectTetrisData = createSelector(
+  configState,
+  (state: ITetrisConfigState) => state.config.data
+);

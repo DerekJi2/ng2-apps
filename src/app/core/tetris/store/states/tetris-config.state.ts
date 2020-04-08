@@ -1,14 +1,14 @@
 import { ITetrisConfig } from '../models/tetris-config.interface';
 import { ITetrisGameData } from '../models/tetris-game-data.interface';
 import { ETetrisGameStatus } from '@tetris/shared/models/tetris-game-status.enum';
+import { ITetrisGameSettings } from '../models/tetris-game-settings.interface';
 
 export interface ITetrisConfigState {
   config: ITetrisConfig;
-  data: ITetrisGameData;
 }
 
 
-const initialConfig: ITetrisConfig = {
+const initialSettings: ITetrisGameSettings = {
   speed: 1,
   level: 1,
   muted: false
@@ -21,6 +21,8 @@ const initialData: ITetrisGameData = {
 };
 
 export const initialTetrisConfigState: ITetrisConfigState = {
-  config: initialConfig,
-  data: initialData,
+  config:  {
+    settings: initialSettings,
+    data: initialData,
+  },
 };

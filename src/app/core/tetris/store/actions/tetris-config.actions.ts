@@ -1,10 +1,14 @@
 import { Action } from '@ngrx/store';
 
 import { ITetrisConfig } from '../models/tetris-config.interface';
+import { TetrisGameStatus } from '@tetris/shared/models/tetris-game-status.type';
 
 export enum ETetrisConfigActions {
   GetConfig = '[Config] Get Tetris Config',
   GetConfigSuccess = '[Config] Get Tetris Config Success',
+
+  UpdateGameStatus = '[Config] Update Tetris Game Status',
+  UpdateGameStatusSuccess = '[Config] Update Tetris Game Status Success',
 
   UpdateConfig = '[Config] Update Tetris Config',
   UpdateConfigSuccess = '[Config] Update Tetris Config Success'
