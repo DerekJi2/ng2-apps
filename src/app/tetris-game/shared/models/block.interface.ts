@@ -1,8 +1,12 @@
 import { IPosition } from './position.interface';
-import { BlockShape } from './block-shape.enum';
+import { EBlockShapeType } from './block-shape.enum';
 
 export interface IBlock {
-    shape: BlockShape;
+    shapeType: EBlockShapeType;
+
+    shape: Array<number>;
+
+    direction: number;
 
     position: IPosition;
 

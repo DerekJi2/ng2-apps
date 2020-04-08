@@ -1,4 +1,4 @@
-export enum BlockShape {
+export enum EBlockShapeType {
     I = 'i',
     L = 'l',
     J = 'j',
