@@ -2,6 +2,7 @@
   <div *ngIf="config$ | async as config">
     <button type="button" class="btn btn-primary" (click)="btnStartClick(config)">Start</button>
     <button type="button" class="btn btn-secondary" (click)="btnPauseClick(config)">Pause</button>
+    <button type="button" class="btn btn-secondary" (click)="btnResumeClick(config)">Resume</button>
     <button type="button" class="btn btn-secondary" (click)="btnStopClick(config)">Stop</button>
   </div>
 </section>

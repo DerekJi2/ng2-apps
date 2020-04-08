@@ -11,7 +11,7 @@ export interface ITetrisAppState {
  *
  */
 export const initialTetrisAppState: ITetrisAppState = {
-  config: initialTetrisConfigState,
+  config: Object.assign({}, initialTetrisConfigState),
 };
 
 /**

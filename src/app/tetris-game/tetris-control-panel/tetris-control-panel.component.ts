@@ -25,8 +25,9 @@ export class TetrisControlPanelComponent extends BaseTetrisComponent implements 
   ngOnInit() {
   }
 
-  btnStartClick(config: ITetrisConfig) { this.service.updateGameStatus(config, ETetrisGameStatus.started); }
-  btnPauseClick(config: ITetrisConfig) { this.service.updateGameStatus(config, ETetrisGameStatus.paused); }
-  btnStopClick(config: ITetrisConfig) { this.service.updateGameStatus(config, ETetrisGameStatus.stopped); }
+  btnStartClick(config: ITetrisConfig) { this.service.start(config); }
+  btnResumeClick(config: ITetrisConfig) { this.service.resume(config); }
+  btnPauseClick(config: ITetrisConfig) { this.service.pause(config); }
+  btnStopClick(config: ITetrisConfig) { this.service.stop(config); }
 
 }

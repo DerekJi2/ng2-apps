@@ -15,7 +15,7 @@ export class SquareMatrixService {
   constructor() { }
 
   /**
-   * 
+   *
    */
   public reset(): void {
     this.matrix = [];
@@ -30,7 +30,7 @@ export class SquareMatrixService {
   }
 
   /**
-   * 
+   *
    * @param y number
    */
   public row(y: number): number[] {
@@ -38,14 +38,14 @@ export class SquareMatrixService {
   }
 
   /**
-   * 
+   *
    */
   public columns(): Array<number[]> {
     return this.matrix;
   }
 
   /**
-   * 
+   *
    * @param x number
    * @param y number
    * @param v number
@@ -58,7 +58,7 @@ export class SquareMatrixService {
   }
 
   /**
-   * 
+   *
    * @param y number
    * @param v number
    */
@@ -69,7 +69,7 @@ export class SquareMatrixService {
   }
 
   /**
-   * 
+   *
    */
   public async spreadUpAndDown(): Promise<void> {
     await this.spreadUp().toPromise();
@@ -77,7 +77,7 @@ export class SquareMatrixService {
   }
 
   /**
-   * 
+   *
    */
   public spreadUp(value: number = 1): Observable<number> {
     let y = this.numberOfRows - 1;

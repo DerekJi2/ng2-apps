@@ -22,7 +22,7 @@ const initialData: ITetrisGameData = {
 
 export const initialTetrisConfigState: ITetrisConfigState = {
   config:  {
-    settings: initialSettings,
-    data: initialData,
+    settings: Object.assign({}, initialSettings),
+    data: Object.assign({}, initialData),
   },
 };

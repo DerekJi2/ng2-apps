@@ -3,22 +3,23 @@ import { initialTetrisConfigState, ITetrisConfigState } from '../states/tetris-c
 
 
 export function tetrisConfigReducers(state = initialTetrisConfigState, action: TetrisConfigActions): ITetrisConfigState {
+  const newState = Object.assign({}, state);
   switch (action.type) {
     case ETetrisConfigActions.GetConfigSuccess: {
       return {
-        ...state,
+        ...newState,
         config: action.payload
       };
     }
 
     case ETetrisConfigActions.UpdateConfigSuccess: {
       return {
-        ...state,
+        ...newState,
         config: action.payload
       };
     }
 
     default:
-      return state;
+      return newState;
   }
 }

@@ -1,7 +1,7 @@
 <div class="info-center-box" *ngIf="config$ | async as config">
 
   <div class="text-right d-num">
-    <span>889</span>
+    <span>{{ config.data.score }}</span>
   </div>
   <div class="text-right d-label">
     <span>SCORE</span>
@@ -16,16 +16,16 @@
 
   <div flexLayout="row" flexLayoutAlign="space-between center">
     <div fxFlex="50%" class="text-center">
-      <div class="d-num">10</div>
+      <div class="d-num">{{ config.settings.speed }}</div>
       <div class="d-label"><i>SPEED</i></div>
     </div>
     <div fxFlex="50%" class="text-center">
-      <div class="d-num">1</div>
+      <div class="d-num">{{ config.settings.level }}</div>
       <div class="d-label"><i>LEVEL</i></div>
     </div>
   </div>
 
-  <div>
+  <div hidden>
     <pre>{{ config$ | async | json }}</pre>
   </div>
 </div>
