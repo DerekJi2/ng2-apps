@@ -8,21 +8,42 @@ export interface ITetrisConfigState {
 }
 
 
-const initialSettings: ITetrisGameSettings = {
-  speed: 1,
-  level: 1,
-  muted: false
+export const initialSettings = (): ITetrisGameSettings => {
+  return {
+    numberOfRows: 20,
+    numberOfCols: 10,
+    speed: 1,
+    level: 1,
+    muted: false
+  };
 };
 
-const initialData: ITetrisGameData = {
-  score: 0,
-  next: null,
-  status: ETetrisGameStatus.stopped,
+export const initialData = (): ITetrisGameData => {
+  return {
+    score: 0,
+    next: null,
+    status: ETetrisGameStatus.stopped,
+  };
+};
+
+export const initialMatrix = (): number[][] => {
+  const matrix = [];
+
+  const settings = initialSettings();
+  for (let y = 0; y < settings.numberOfRows; y++) {
+    const row: number[] = [];
+    for (let x = 0; x < settings.numberOfCols; x++) {
+      row.push(0);
+    }
+    matrix.push(row);
+  }
+  return matrix;
 };
 
 export const initialTetrisConfigState: ITetrisConfigState = {
   config:  {
-    settings: Object.assign({}, initialSettings),
-    data: Object.assign({}, initialData),
+    settings: initialSettings(),
+    data: initialData(),
+    matrix: initialMatrix(),
   },
 };
