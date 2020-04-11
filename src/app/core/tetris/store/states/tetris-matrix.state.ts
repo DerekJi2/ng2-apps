@@ -1,7 +1,7 @@
-import { ITetrisConfig } from '../models/tetris-config.interface';
-import { ITetrisGameData } from '../models/tetris-game-data.interface';
+import { ITetrisConfig } from '../../../../tetris-game/shared/models/store/tetris-config.interface';
+import { ITetrisGameData } from '../../../../tetris-game/shared/models/store/tetris-game-data.interface';
 import { ETetrisGameStatus } from '@tetris/shared/models/tetris-game-status.enum';
-import { ITetrisGameSettings } from '../models/tetris-game-settings.interface';
+import { ITetrisGameSettings } from '../../../../tetris-game/shared/models/store/tetris-game-settings.interface';
 import { initialSettings } from './tetris-config.state';
 
 export interface ITetrisMatrixState {

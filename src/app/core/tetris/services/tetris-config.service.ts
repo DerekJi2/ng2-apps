@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ITetrisConfig } from '../store/models/tetris-config.interface';
+import { ITetrisConfig } from '../../../tetris-game/shared/models/store/tetris-config.interface';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ITetrisAppState } from '../store/states/tetris-app.state';

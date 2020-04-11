@@ -6,7 +6,7 @@ import { selectTetrisMatrix } from '@core/tetris/store/selectors/tetris-matrix.s
 import { forkJoin } from 'rxjs';
 import { ITetrisMatrixState } from '@core/tetris/store/states/tetris-matrix.state';
 import { TetrisMatrix } from '../models/tetris-matrix.type';
-import { ITetrisConfig } from '@core/tetris/store/models/tetris-config.interface';
+import { ITetrisConfig } from '@tetris/shared/models/store/tetris-config.interface';
 
 export abstract class BaseTetrisComponent extends BaseAppComponent {
 

@@ -5,7 +5,7 @@ import { ITetrisAppState } from '@core/tetris/store/states/tetris-app.state';
 import { ETetrisGameStatus } from '@tetris/shared/models/tetris-game-status.enum';
 import { ITetrisConfigState } from '@core/tetris/store/states/tetris-config.state';
 import { UpdateConfig } from '@core/tetris/store/actions/tetris-config.actions';
-import { ITetrisConfig } from '@core/tetris/store/models/tetris-config.interface';
+import { ITetrisConfig } from '@tetris/shared/models/store/tetris-config.interface';
 import { TetrisConfigService } from '@core/tetris/services/tetris-config.service';
 
 @Component({

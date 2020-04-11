@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { ETetrisConfigActions, GetConfig, GetConfigSuccess, UpdateConfig, UpdateConfigSuccess } from '../actions/tetris-config.actions';
 import { Store, select } from '@ngrx/store';
 import { ITetrisAppState } from '../states/tetris-app.state';
-import { ITetrisConfig } from '../models/tetris-config.interface';
+import { ITetrisConfig } from '../../../../tetris-game/shared/models/store/tetris-config.interface';
 import { TetrisConfigService } from '@core/tetris/services/tetris-config.service';
 import { selectTetrisConfig } from '../selectors/tetris-config.selectors';
 

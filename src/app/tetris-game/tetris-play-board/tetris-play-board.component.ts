@@ -7,7 +7,7 @@ import { interval, timer, Observable, of, forkJoin } from 'rxjs';
 import { tap, switchMap, take } from 'rxjs/operators';
 import { ETetrisGameStatus } from '@tetris/shared/models/tetris-game-status.enum';
 import { UpdateConfig } from '@core/tetris/store/actions/tetris-config.actions';
-import { ITetrisConfig } from '@core/tetris/store/models/tetris-config.interface';
+import { ITetrisConfig } from '@tetris/shared/models/store/tetris-config.interface';
 import { UpdateMatrix } from '@core/tetris/store/actions/tetris-matrix.actions';
 import { TetrisMatrixBuilder } from '@tetris/shared/builders/tetris-matrix.builder';
 
@@ -31,16 +31,16 @@ export class TetrisPlayBoardComponent extends BaseTetrisComponent implements OnI
   }
 
   ngOnInit() {
-    // this.matrixSvc.reset();
+    this.matrixSvc.reset();
     // this.reset().subscribe();
-    {
-      let config: ITetrisConfig;
-      this.config$.pipe(tap((c) => config = c)).subscribe();
-      const matrix = this.builder.initialize();
-      this.store.dispatch(new UpdateMatrix(matrix));
+    // {
+    //   let config: ITetrisConfig;
+    //   this.config$.pipe(tap((c) => config = c)).subscribe();
+    //   const matrix = this.builder.initialize();
+    //   this.store.dispatch(new UpdateMatrix(matrix));
 
-      this.move$(config, matrix).subscribe();
-    }
+    //   this.move$(config, matrix).subscribe();
+    // }
 
     // this.matrixSvc.reset();
     // this.matrixSvc.spreadUpAndDown();

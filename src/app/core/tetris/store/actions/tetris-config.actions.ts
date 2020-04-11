@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ITetrisConfig } from '../models/tetris-config.interface';
+import { ITetrisConfig } from '../../../../tetris-game/shared/models/store/tetris-config.interface';
 import { TetrisGameStatus } from '@tetris/shared/models/tetris-game-status.type';
 
 export enum ETetrisConfigActions {
