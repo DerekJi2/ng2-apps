@@ -10,75 +10,65 @@ import { UpdateMatrix } from '../store/actions/tetris-matrix.actions';
 import { TetrisMatrix } from '@tetris/shared/models/tetris-matrix.type';
 import { selectTetrisMatrix } from '../store/selectors/tetris-matrix.selectors';
 import { initialTetrisConfigState, initialSettings, initialData, initialMatrix } from '../store/states/tetris-config.state';
-
-interface IMatrixServiceSubjects {
-  config: BehaviorSubject<ITetrisConfig>;
-  matrix: BehaviorSubject<TetrisMatrix>;
-}
+import { ConfigBehaviorSubjectService } from '../subjects/config-behavior-subject.service';
+import { MatrixBehaviorSubjectService } from '../subjects/matrix-behavior-subject.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SquareMatrixService {
 
-  public subjects: IMatrixServiceSubjects = {
-    config: new BehaviorSubject<ITetrisConfig>({
-      settings: initialSettings(),
-      data: initialData(),
-    }),
-    matrix: new BehaviorSubject<TetrisMatrix>(initialMatrix()),
-  };
-
-  public config$ = this.subjects.config.asObservable();
-  public matrix$ = this.subjects.matrix.asObservable();
-  protected config: ITetrisConfig;
-  protected matrix: TetrisMatrix;
+  public config$ = this.configSubject.value$;
+  public matrix$ = this.matrixSubject.value$;
 
   constructor(
-    // protected store: Store<ITetrisAppState>
+    protected configSubject: ConfigBehaviorSubjectService,
+    protected matrixSubject: MatrixBehaviorSubjectService,
   ) {
-    // this.config$.pipe(tap((config) => this.config = config)).subscribe();
   }
 
-  get numberOfRows() { return this.config.settings.numberOfRows || 0; }
-  get numberOfCols() { return this.config.settings.numberOfCols || 0; }
-  get configData() { return this.config; }
+  get numberOfRows() { return this.config && this.config.settings ? this.config.settings.numberOfRows : 0; }
+  get numberOfCols() { return this.config && this.config.settings ? this.config.settings.numberOfCols : 0; }
+  get config() { return this.configSubject.value; }
+  get matrix() { return this.matrixSubject.value; }
 
   getMatrix() { return this.matrix; }
 
-  initialize(): TetrisMatrix {
-    this.matrix = [];
+  initialize(): void {
+    const matrix = [];
     for (let y = 0; y < this.numberOfRows; y++) {
       const row: number[] = [];
       for (let x = 0; x < this.numberOfCols; x++) {
         row.push(0);
       }
-      this.matrix.push(row);
+      matrix.push(row);
     }
 
-    return this.getMatrix();
+    this.matrixSubject.update(matrix);
   }
 
   /**
    *
+   * @param matrix TetrixMatrix
    * @param x coordinate number on X-axis
    * @param y coordinate number on Y-axis
    * @param v the value to be set
    */
-  setCellValue(x: number, y: number, v: number = null): void {
+  setCellValue(matrix: TetrisMatrix, x: number, y: number, v: number = null): void {
     if (v !== null) {
-      this.matrix[y][x] = v;
+      matrix[y][x] = v;
     }
   }
 
   /**
    *
+   * @param matrix TetrixMatrix
    * @param y the coordinate number of the row on Y-axis
    * @param v the value to be set
    */
-  public setRowValues(y: number, v: number): void {
+  public setRowValues(matrix: TetrisMatrix, y: number, v: number): void {
     for (let x = 0; x < this.numberOfCols; x++) {
-      this.setCellValue(x, y, v);
+      this.setCellValue(matrix, x, y, v);
     }
   }
 
@@ -89,7 +79,6 @@ export class SquareMatrixService {
     console.log('matrix service: reset');
 
     this.initialize();
-    // this.store.dispatch(new UpdateMatrix(this.getMatrix()));
 
     this.spreadUp().subscribe();
   }
@@ -106,11 +95,13 @@ export class SquareMatrixService {
       take(this.config.settings.numberOfRows),
       tap(() => {
         console.log(`y = ${y}`);
-        this.setRowValues(y--, value);
+        const newMatrix = this.matrix;
+        this.setRowValues(newMatrix, y--, value);
 
         console.log('dispatch ...');
         console.log(this.matrix);
         // this.store.dispatch(new UpdateMatrix(this.matrix));
+        this.matrixSubject.update(newMatrix);
       }),
     );
 

@@ -23,6 +23,8 @@ export class TetrisPlayBoardComponent extends BaseTetrisComponent implements OnI
   public squareMatrix: number[][] = [];
   protected builder: TetrisMatrixBuilder = new TetrisMatrixBuilder([], 20, 10);
 
+  public matrix$ = this.matrixSvc.matrix$;
+
   constructor(
     public matrixSvc: SquareMatrixService,
     protected store: Store<ITetrisAppState>
