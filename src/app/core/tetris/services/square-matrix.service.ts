@@ -1,106 +1,73 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
+import { TetrisMatrixBuilder } from '@tetris/shared/builders/tetris-matrix.builder';
+import { Store } from '@ngrx/store';
+import { ITetrisAppState } from '../store/states/tetris-app.state';
+import { ITetrisConfig } from '../store/models/tetris-config.interface';
+import { selectTetrisConfig } from '../store/selectors/tetris-config.selectors';
+import { UpdateMatrix } from '../store/actions/tetris-matrix.actions';
+import { TetrisMatrix } from '@tetris/shared/models/tetris-matrix.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SquareMatrixService {
 
-  public readonly numberOfRows = 20;
-  public readonly numberOfCols = 10;
+  public config$ = this.store.select(selectTetrisConfig);
+  public config: ITetrisConfig;
 
-  private matrix: number[][] = [];
-
-  constructor() { }
+  constructor(
+    protected store: Store<ITetrisAppState>
+  ) {
+    this.config$.pipe(tap((config) => this.config = config)).subscribe();
+  }
 
   /**
    *
    */
   public reset(): void {
-    this.matrix = [];
+    console.log('matrix service: reset');
+    this.config$.pipe(tap((config) => this.config = config)).subscribe();
 
-    for (let y = 0; y < this.numberOfRows; y++) {
-      const row: number[] = [];
-      for (let x = 0; x < this.numberOfCols; x++) {
-        row.push(0);
-      }
-      this.matrix.push(row);
-    }
-  }
+    const initialMatrix = new TetrisMatrixBuilder().initialize();
+    this.store.dispatch(new UpdateMatrix(initialMatrix));
 
-  /**
-   *
-   * @param y number
-   */
-  public row(y: number): number[] {
-    return this.matrix[y];
+    this.spreadUp(initialMatrix).subscribe();
   }
 
   /**
    *
    */
-  public columns(): Array<number[]> {
-    return this.matrix;
-  }
-
-  /**
-   *
-   * @param x number
-   * @param y number
-   * @param v number
-   */
-  public value(x: number, y: number, v: number = null) {
-    if (v !== null) {
-      this.matrix[y][x] = v;
-    }
-    return this.matrix[y][x];
-  }
-
-  /**
-   *
-   * @param y number
-   * @param v number
-   */
-  public setRowValues(y: number, v: number): void {
-    for (let x = 0; x < this.numberOfCols; x++) {
-      this.value(x, y, v);
-    }
-  }
-
-  /**
-   *
-   */
-  public async spreadUpAndDown(): Promise<void> {
-    await this.spreadUp().toPromise();
-    await this.spreadDown().toPromise();
-  }
-
-  /**
-   *
-   */
-  public spreadUp(value: number = 1): Observable<number> {
-    let y = this.numberOfRows - 1;
+  public spreadUp(matrix: TetrisMatrix, value: number = 1): Observable<number> {
+    console.log('matrix service: spreadUp');
+    let y = this.config.settings.numberOfRows - 1;
     const move$ = interval(50)
     .pipe(
-      take(this.numberOfRows),
+      // take(3),
+      take(this.config.settings.numberOfRows),
       tap(() => {
         console.log(`y = ${y}`);
-        this.setRowValues(y--, value);
+        const builder = new TetrisMatrixBuilder(matrix, this.config.settings.numberOfRows, this.config.settings.numberOfCols);
+        const newMatrix = Object.assign([], builder.setRowValues(y--, value));
+
+        console.log('dispatch ...');
+        console.log(newMatrix);
+        this.store.dispatch(new UpdateMatrix(newMatrix));
       }),
     );
 
     return move$;
   }
 
-  public spreadDown(value: number = 0): Observable<number> {
+  public spreadDown(builder: TetrisMatrixBuilder, value: number = 0): Observable<number> {
     let y = 0;
     const move$ = interval(50)
     .pipe(
-      take(this.numberOfRows),
+      take(builder.numberOfRows),
       tap(() => {
         console.log(`y = ${y}`);
-        this.setRowValues(y++, value);
+        builder.setRowValues(y++, value);
       }),
     );
 

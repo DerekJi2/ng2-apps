@@ -1,10 +1,12 @@
 import { ITetrisConfigState, initialTetrisConfigState } from './tetris-config.state';
+import { ITetrisMatrixState, initialTetrisMatrixState } from './tetris-matrix.state';
 
 /**
  *
  */
 export interface ITetrisAppState {
   config: ITetrisConfigState;
+  matrix: ITetrisMatrixState;
 }
 
 /**
@@ -12,6 +14,7 @@ export interface ITetrisAppState {
  */
 export const initialTetrisAppState: ITetrisAppState = {
   config: Object.assign({}, initialTetrisConfigState),
+  matrix: Object.assign([], initialTetrisMatrixState),
 };
 
 /**

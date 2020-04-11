@@ -5,5 +5,4 @@ import { ITetrisGameSettings } from './tetris-game-settings.interface';
 export interface ITetrisConfig {
     settings: ITetrisGameSettings;
     data: ITetrisGameData;
-    matrix: number[][];
 }

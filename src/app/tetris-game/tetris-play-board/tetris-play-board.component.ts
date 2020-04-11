@@ -3,11 +3,13 @@ import { SquareMatrixService } from '@core/tetris/services/square-matrix.service
 import { BaseTetrisComponent } from '@tetris/shared/components/base-tetris-component';
 import { ITetrisAppState } from '@core/tetris/store/states/tetris-app.state';
 import { Store } from '@ngrx/store';
-import { interval, timer, Observable } from 'rxjs';
-import { tap, switchMap } from 'rxjs/operators';
+import { interval, timer, Observable, of, forkJoin } from 'rxjs';
+import { tap, switchMap, take } from 'rxjs/operators';
 import { ETetrisGameStatus } from '@tetris/shared/models/tetris-game-status.enum';
 import { UpdateConfig } from '@core/tetris/store/actions/tetris-config.actions';
 import { ITetrisConfig } from '@core/tetris/store/models/tetris-config.interface';
+import { UpdateMatrix } from '@core/tetris/store/actions/tetris-matrix.actions';
+import { TetrisMatrixBuilder } from '@tetris/shared/builders/tetris-matrix.builder';
 
 @Component({
   selector: 'app-tetris-play-board',
@@ -19,6 +21,7 @@ export class TetrisPlayBoardComponent extends BaseTetrisComponent implements OnI
   public readonly matrixX = 10;
   public readonly matrixY = 20;
   public squareMatrix: number[][] = [];
+  protected builder: TetrisMatrixBuilder = new TetrisMatrixBuilder([], 20, 10);
 
   constructor(
     public matrixSvc: SquareMatrixService,
@@ -27,22 +30,46 @@ export class TetrisPlayBoardComponent extends BaseTetrisComponent implements OnI
     super(store);
   }
 
-  get Columns(): Array<number[]> {
-    const cols = this.matrixSvc.columns();
-    console.log(cols.length);
-    return cols;
-  }
-
-  public Row(x: number): number[] {
-    return this.matrixSvc.row(x);
-  }
-
   ngOnInit() {
-    this.matrixSvc.reset();
+    // this.matrixSvc.reset();
+    // this.reset().subscribe();
+    {
+      let config: ITetrisConfig;
+      this.config$.pipe(tap((c) => config = c)).subscribe();
+      const matrix = this.builder.initialize();
+      this.store.dispatch(new UpdateMatrix(matrix));
 
-    this.matrixSvc.spreadUpAndDown();
+      this.move$(config, matrix).subscribe();
+    }
 
-    this.startGameLoop$().subscribe();
+    // this.matrixSvc.reset();
+    // this.matrixSvc.spreadUpAndDown();
+  }
+
+  protected reset(): Observable<any> {
+    let config: ITetrisConfig;
+    this.config$.pipe(tap((c) => config = c)).subscribe();
+
+    const obs = this.matrix$.pipe(
+      switchMap((matrix) => this.move$(config, matrix))
+    );
+    return obs;
+  }
+
+  protected move$(config: ITetrisConfig, matrix: number[][]) {
+    console.log(`move ...`);
+    let y = config.settings.numberOfRows - 1;
+    return interval(50).pipe(
+      take(config.settings.numberOfRows),
+      tap(() => {
+        console.log(`y = ${y}`);
+        let newMatrix = Object.assign([], matrix);
+        const builder = new TetrisMatrixBuilder(newMatrix, config.settings.numberOfRows, config.settings.numberOfCols);
+        newMatrix = builder.setRowValues(y, 1);
+        y--;
+        this.store.dispatch(new UpdateMatrix(newMatrix));
+      }),
+    );
   }
 
   protected startGameLoop$(): Observable<any> {
