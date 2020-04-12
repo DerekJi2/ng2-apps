@@ -14,7 +14,7 @@ export class MatrixBehaviorSubjectService extends BehaviorSubject<TetrisMatrix> 
   }
 
   get value$() { return this.asObservable(); }
-  get value() { return Object.assign({}, this.data); }
+  get value() { return Object.assign([], this.data); }
 
   read() { this.next(this.data); }
 

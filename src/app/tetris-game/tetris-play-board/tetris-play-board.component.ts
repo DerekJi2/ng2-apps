@@ -9,11 +9,6 @@ import { BaseTetrisComponent } from '@tetris/shared/components/base-tetris-compo
 })
 export class TetrisPlayBoardComponent extends BaseTetrisComponent implements OnInit {
 
-  // public readonly matrixX = 10;
-  // public readonly matrixY = 20;
-  // public squareMatrix: number[][] = [];
-  // protected builder: TetrisMatrixBuilder = new TetrisMatrixBuilder([], 20, 10);
-
   public matrix$ = this.matrixSvc.matrix$;
 
   constructor(
@@ -23,7 +18,7 @@ export class TetrisPlayBoardComponent extends BaseTetrisComponent implements OnI
   }
 
   ngOnInit() {
-    // this.matrixSvc.reset();
+    this.matrixSvc.reset();
     // this.reset().subscribe();
     // {
     //   let config: ITetrisConfig;

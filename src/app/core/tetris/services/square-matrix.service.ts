@@ -84,16 +84,12 @@ export class SquareMatrixService {
     let y = this.config.settings.numberOfRows - 1;
     const move$ = interval(50)
     .pipe(
-      // take(3),
       take(this.config.settings.numberOfRows),
       tap(() => {
         console.log(`y = ${y}`);
         const newMatrix = this.matrix;
         this.setRowValues(newMatrix, y--, value);
 
-        console.log('dispatch ...');
-        console.log(this.matrix);
-        // this.store.dispatch(new UpdateMatrix(this.matrix));
         this.matrixSubject.update(newMatrix);
       }),
     );
