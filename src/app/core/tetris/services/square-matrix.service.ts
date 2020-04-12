@@ -1,15 +1,8 @@
 import { Injectable } from '@angular/core';
-import { interval, Observable, BehaviorSubject } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { TetrisMatrixBuilder } from '@tetris/shared/builders/tetris-matrix.builder';
-import { Store } from '@ngrx/store';
-import { ITetrisAppState } from '../store/states/tetris-app.state';
-import { ITetrisConfig } from '../../../tetris-game/shared/models/store/tetris-config.interface';
-import { selectTetrisConfig } from '../store/selectors/tetris-config.selectors';
-import { UpdateMatrix } from '../store/actions/tetris-matrix.actions';
 import { TetrisMatrix } from '@tetris/shared/models/tetris-matrix.type';
-import { selectTetrisMatrix } from '../store/selectors/tetris-matrix.selectors';
-import { initialTetrisConfigState, initialSettings, initialData, initialMatrix } from '../store/states/tetris-config.state';
 import { ConfigBehaviorSubjectService } from '../subjects/config-behavior-subject.service';
 import { MatrixBehaviorSubjectService } from '../subjects/matrix-behavior-subject.service';
 

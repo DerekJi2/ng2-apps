@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ITetrisConfig } from '@tetris/shared/models/store/tetris-config.interface';
-import { initialSettings, initialData } from '../store/states/tetris-config.state';
+import { initialSettings, initialData } from '@tetris/shared/models/models/tetris-initial-values';
 
 const initialConfigData: ITetrisConfig = {
   settings: initialSettings(),

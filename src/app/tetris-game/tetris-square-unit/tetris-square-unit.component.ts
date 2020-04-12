@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseTetrisComponent } from '@tetris/shared/components/base-tetris-component';
-import { ITetrisAppState } from '@core/tetris/store/states/tetris-app.state';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-tetris-square-unit',
@@ -17,9 +15,8 @@ export class TetrisSquareUnitComponent extends BaseTetrisComponent implements On
   }
 
   constructor(
-    protected store: Store<ITetrisAppState>
   ) {
-    super(store);
+    super();
   }
 
   ngOnInit() {

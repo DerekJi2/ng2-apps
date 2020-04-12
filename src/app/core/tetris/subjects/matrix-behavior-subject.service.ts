@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TetrisMatrix } from '@tetris/shared/models/tetris-matrix.type';
-import { initialMatrix } from '../store/states/tetris-config.state';
+import { initialMatrix } from '@tetris/shared/models/models/tetris-initial-values';
 
 @Injectable({
   providedIn: 'root'

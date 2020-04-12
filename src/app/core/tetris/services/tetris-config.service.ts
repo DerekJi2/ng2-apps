@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { ITetrisConfig } from '../../../tetris-game/shared/models/store/tetris-config.interface';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { ITetrisAppState } from '../store/states/tetris-app.state';
 import { ETetrisGameStatus } from '@tetris/shared/models/tetris-game-status.enum';
-import { UpdateConfig } from '../store/actions/tetris-config.actions';
-import { selectTetrisConfig } from '../store/selectors/tetris-config.selectors';
-import { initialTetrisConfigState } from '../store/states/tetris-config.state';
+import { ConfigBehaviorSubjectService } from '../subjects/config-behavior-subject.service';
+import { initialData, initialSettings } from '@tetris/shared/models/models/tetris-initial-values';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +12,24 @@ import { initialTetrisConfigState } from '../store/states/tetris-config.state';
 export class TetrisConfigService {
 
   constructor(
-    protected store: Store<ITetrisAppState>
+    protected configSubject: ConfigBehaviorSubjectService,
   ) { }
 
-  getInitialConfig() { return Object.assign({}, initialTetrisConfigState.config); }
+  getInitialConfig() {
+    return Object.assign({}, {
+      data: initialData(),
+      settings: initialSettings(),
+    });
+  }
 
   getConfig(): Observable<ITetrisConfig> {
-    return this.store.pipe(select(selectTetrisConfig));
+    return this.configSubject.value$;
   }
 
   updateGameStatus(config: ITetrisConfig, status: ETetrisGameStatus): void {
     const newConfig = Object.assign({}, config);
     newConfig.data.status = status;
-    this.store.dispatch(new UpdateConfig(newConfig));
+    this.configSubject.update(newConfig);
   }
 
   start(config: ITetrisConfig): void {

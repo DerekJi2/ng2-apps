@@ -1,12 +1,6 @@
-import { ITetrisConfig } from '../../../../tetris-game/shared/models/store/tetris-config.interface';
-import { ITetrisGameData } from '../../../../tetris-game/shared/models/store/tetris-game-data.interface';
-import { ETetrisGameStatus } from '@tetris/shared/models/tetris-game-status.enum';
-import { ITetrisGameSettings } from '../../../../tetris-game/shared/models/store/tetris-game-settings.interface';
-
-export interface ITetrisConfigState {
-  config: ITetrisConfig;
-}
-
+import { ITetrisGameSettings } from '../store/tetris-game-settings.interface';
+import { ITetrisGameData } from '../store/tetris-game-data.interface';
+import { ETetrisGameStatus } from '../tetris-game-status.enum';
 
 export const initialSettings = (): ITetrisGameSettings => {
   return {
@@ -38,11 +32,4 @@ export const initialMatrix = (): number[][] => {
     matrix.push(row);
   }
   return matrix;
-};
-
-export const initialTetrisConfigState: ITetrisConfigState = {
-  config:  {
-    settings: initialSettings(),
-    data: initialData(),
-  },
 };
